@@ -1,0 +1,6 @@
+---
+# vars file for lang-ja-ubuntu
+lang_ja_nonroot: "{{(ansible_env.HOME == '/root') | ternary('no', 'yes')}}"
+lang_ja_deps:
+- language-pack-ja-base
+- language-pack-ja

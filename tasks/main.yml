@@ -1,0 +1,20 @@
+---
+# tasks file for lang-ja-ubuntu
+- name: Install lang-ja dependencies.
+  apt:
+    name: "{{item}}"
+  with_items: "{{lang_ja_deps}}"
+  become: "{{lang_ja_nonroot}}"
+- name: locale-gen
+  locale_gen:
+    name: "{{item}}"
+  become: "{{lang_ja_nonroot}}"
+  with_items:
+  - ja_JP.UTF-8
+  - en_US.UTF-8
+- name: Update locale
+  command: update-locale LANG=ja_JP.UTF-8 LANGUAGE=ja_JP
+  become: "{{lang_ja_nonroot}}"
+  register: result
+- debug:
+    var: result
